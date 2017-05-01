@@ -1,0 +1,27 @@
+NAME      MCF
+ROWS
+ N  obj
+ E  c0
+ E  c1
+ E  c2
+ E  c3
+COLUMNS
+ x0	obj	3	c0	-1
+ x0	c1	1
+ x1	obj	1	c1	-1
+ x1	c2	1
+ x2	obj	1	c2	-1
+ x2	c3	1
+ x3	obj	2	c0	-1
+ x3	c3	1
+RHS
+ rhs	c0	-3
+ rhs	c1	0
+ rhs	c2	0
+ rhs	c3	3
+BOUNDS
+ UP BOUND	x0	2
+ UP BOUND	x1	2
+ UP BOUND	x2	2
+ UP BOUND	x3	2
+ENDATA
