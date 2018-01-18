@@ -35,6 +35,7 @@
 
 #include <fstream>
 #include <sstream>
+#include <cstring>
 
 #include "MCFSimplex.h"
 #define MCFSOLVER MCFSimplex
