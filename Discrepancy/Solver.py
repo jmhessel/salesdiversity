@@ -244,6 +244,7 @@ class Solver:
     GINI = self.gini(deg_dist)
     ENT = self.entropy(deg_dist/(1.*sum(C)))
     SOLD, SOLR, SOLA, P = self.solutionMetrics(C, A, edges, test_fn)
+    self.edges = edges
     return (SOLD/2./sum(C), SOLR, SOLA, P, GINI, ENT, deg_dist, duration)
 
   def solveExternal(self, C, A, train_in, rec_in, test_fn, script_name="FD"):
@@ -296,6 +297,7 @@ class Solver:
     deg_dist         = self.degree_distribution(edges)
     GINI             = self.gini(deg_dist)
     ENT              = self.entropy(deg_dist/(1.*sum(C)))
+    self.edges = edges
     return (SOLD/2./sum(C), SOLR, SOLA, P, GINI, ENT, deg_dist, 0)
 
   def solve(self, C, A, dmx_fn, test_fn, lambd=1, mu=0, stages=1, stage_amount=5):
@@ -317,6 +319,7 @@ class Solver:
     SOLD, SOLR, SOLA, P = self.solutionMetrics(C,A,edges,test_fn)
     GINI             = self.gini(deg_dist)
     ENT              = self.entropy(deg_dist/(1.*sum(C)))
+    self.edges = edges
     return (SOLD/2./sum(C), SOLR, SOLA, P, GINI, ENT, deg_dist, duration)
 
   def solveWithGoal(self, C, A, dmx_fn, test_fn, lambd=1, mu=0, stages=1, stage_amount=5):
@@ -343,5 +346,5 @@ class Solver:
     SOLD, SOLR, SOLA, P  = self.solutionMetrics(C,A,edges,test_fn)
     GINI             = self.gini(deg_dist)
     ENT              = self.entropy(deg_dist/(1.*sum(C)))
-
+    self.edges = edges
     return (SOLD/2./sum(C), SOLR, SOLA, P, GINI, ENT, deg_dist, duration1+duration2)
