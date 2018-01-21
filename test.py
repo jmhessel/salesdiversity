@@ -30,9 +30,16 @@ target = m_supergraph.uniformA(10)
 m_solver = Solver.Solver(m_supergraph)
 const = [10 for _ in range(n_users)]
 const[0] = 0
-res = m_solver.solve(const,
+m_solver.solveGreedy(const,
                      target,
-                     'dmx.problem',
+                     #'dmx.problem',
                      'rec_table.txt')
-print(len(m_solver.edges))
+GREEDY_edges = m_solver.edges
+print(len(GREEDY_edges))
+m_solver.solveWithGoal(const,
+                       target,
+                       'dmx.problem',
+                       'rec_table.txt')
+GOL_edges = m_solver.edges
+print(len(GOL_edges))
 quit()
