@@ -16,27 +16,26 @@ scores = np.random.random((n_users, n_items))
 candidate_recs = np.argsort(-scores, axis=1)[:,:k_start]
 print(candidate_recs.shape)
 
+# NOTE NOTE NOTE: you NEED to index from 1 or the code does not work!!!
 with open('rec_table.txt', 'w') as f:
     lines = []
     for u in range(n_users):
         for i in range(k_start):
             item_idx = candidate_recs[u,i]
-            lines.append('{} {} {}'.format(u, item_idx, scores[u, item_idx]))
+            lines.append('{} {} {}'.format(u+1, item_idx+1, scores[u, item_idx]))
     f.write('\n'.join(lines))
 
 m_supergraph = Supergraph.SuperGraph.readRecommendationTable('rec_table.txt')
-target = m_supergraph.uniformA(10)
-
+target = m_supergraph.convexCombinationA(10, alpha=.5)
+constraints = m_supergraph.uniformC(10)
+print(target)
 m_solver = Solver.Solver(m_supergraph)
-const = [10 for _ in range(n_users)]
-const[0] = 0
-m_solver.solveGreedy(const,
+m_solver.solveGreedy(constraints,
                      target,
-                     #'dmx.problem',
                      'rec_table.txt')
 GREEDY_edges = m_solver.edges
 print(len(GREEDY_edges))
-m_solver.solveWithGoal(const,
+m_solver.solveWithGoal(constraints,
                        target,
                        'dmx.problem',
                        'rec_table.txt')
