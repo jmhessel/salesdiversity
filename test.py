@@ -53,8 +53,6 @@ GREEDY_edges = convert_edges_to_normal(m_solver.edges)
 #okay -- edges are encoded in a weird way.
 #the first value is the 1-indexed user
 #the second value is the 1-indexed item + N_users.
-
-quit()
 print(len(GREEDY_edges))
 m_solver.solveWithGoal(constraints,
                        target,
@@ -62,4 +60,5 @@ m_solver.solveWithGoal(constraints,
                        'rec_table.txt')
 GOL_edges = convert_edges_to_normal(m_solver.edges)
 print(len(GOL_edges))
-quit()
+
+
